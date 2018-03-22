@@ -5,10 +5,12 @@ EDISON 시뮬레이션 SW 개발자를 위한 1개의 입력 파일 읽어, sin 
 
 ```
 bin/
- - simrc      //gnuplot를 사용하기 위한 환경변수 추가
+ - simrc      //환경변수에 plotly lib이 설치된 python 경로추가
+ - Sin.sh	  //실행 스크립트(run Sin.x -> python post.py)
+ - post.py	  //oneD 파일을 plotly 데이터로 변환 코드
 src/
  - Makeflie
- - main.c     //main 소스 코드
+ - main.c     //main 소스 코드sin()에결과를 oneD 파일로 출력
 inp/
  - input.dat //샘플 입력 파일
 ```
@@ -39,13 +41,13 @@ d = 0.3 ;
 zip 파일을 다운로드 받아 압축을 풀거나 ```git clone``` 명령어를 이용하여, 프로젝트를 가져올 수 있습니다.
 
 ```
-$ git clone git@github.com:sp-edison/c_example_gnuplot.git
+$ git clone https://github.com/sp-edison/c_example_oneD_plotly.git
 ```
 
-다운로드가 완료되면, ```c_example_gnuplot``` 폴더가 생성되며, **src** 폴더로 이동하여 **make all** 명령어를 사용하면, 컴파일이 완료됩니다.
+다운로드가 완료되면, ```c_example_oneD_plotly``` 폴더가 생성되며, **src** 폴더로 이동하여 **make all** 명령어를 사용하면, 컴파일이 완료됩니다.
 
 ```
-$ cd c_example_gunplot/src
+$ cd c_example_oneD_plotly/src
 $ make all
 gcc -c main.c -o main.o
 Compiled main.c successfully!
@@ -57,7 +59,7 @@ Linking complete!
 
 ```
 $ cd ../bin
-$ ./Sin.x -i ../inp/input.dat
+$ ./Sin.sh -i ../inp/input.dat
 ```
 
 
@@ -67,5 +69,4 @@ $ ./Sin.x -i ../inp/input.dat
 
 - **src** 폴더 안에서 ```make all``` 커맨드 입력시, 컴파일이 정상적으로 왼료된 경우 바이너리 파일이 **bin** 폴더에 저장이 되면 됩니다.
 
-- 바이너리가 실행되는 과정에서 **gnuplot**를 사용하며, gnuplot을 사용하기 위한 환경 변수 값을 **bin** 폴더 안에 **simrc**라는 파일에 추가하였습니다. 추가해야 합니다.
-
+- Sin.sh 파일을 실행하게 되면, make로 생성된 바이너리가 실행된 이후 post.py를 실행하게 됩니다. EDISON 플랫폼에서 실행하는 경우 plotly 라이브러리를 쓰게 되는데 해당 라이브러리가 설치된 python을환경변수에 등록해야합니다. 이경우 **bin** 폴더안에 simrc라는 파일에 추가해야하는 환경변수들을 등록하면 EDISON 플랫폼에서 실행파일을 실행하기전 simrc에 있는 환경변수를 추가하게 됩니다.
