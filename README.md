@@ -6,7 +6,7 @@ EDISON 시뮬레이션 SW 개발자를 위한 1개의 입력 파일 읽어, sin 
 ```
 bin/
  - simrc      //환경변수에 plotly lib이 설치된 python 경로추가
- - Sin.sh	  //실행 스크립트(run Sin.x -> python post.py)
+ - simpost	  // 실행파일 실행 이후 실행 스크립트
  - post.py	  //oneD 파일을 plotly 데이터로 변환 코드
 src/
  - Makeflie
@@ -57,9 +57,11 @@ Linking complete!
 
 기본 값으로 등록된 TARGET 값이 Sin.x이며, 생성된 bin 폴더로 이동하여, 아래와 같이 명령어를 입력하면 실행이 됩니다.
 
-```
+```bash
 $ cd ../bin
-$ ./Sin.sh -i ../inp/input.dat
+$ source simrc
+$ ./Sin.x -i ../inp/input.dat
+$ source simpost
 ```
 
 
