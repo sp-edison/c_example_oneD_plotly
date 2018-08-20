@@ -1,3 +1,7 @@
+import sys
+import os
+import getopt
+
 import numpy as np
 import json
 from plotly.utils import PlotlyJSONEncoder
@@ -17,30 +21,37 @@ def plotlyfig2json(fig, fpath=None):
         return fig_json
 
 
-	
-f = open("./result/result.oneD", 'r')
-lines = f.readlines()
+if __name__ == "__main__": 
+	try:
+	    otps, args = getopt.getopt(sys.argv[1:], "i:")
+	except getopt.GetoptError as err:
+		print(str(err))
+		sys.exit(1)
 
-x = [];
-y = [];
-for line in lines:
-	if not line[0] == '#' :
-		x.append( float(line.split()[0]))
-		y.append( float(line.split()[1]))
-#print(x,y)
-f.close()
+	for opt, arg in otps:
+		if opt in "-i":
+			f = open(arg, "r")
+	lines = f.readlines()
 
-trace = go.Scatter(
-    x = x,
-    y = y,
-    mode = 'lines')
+	x = [];
+	y = [];
+	for line in lines:
+		if not line[0] == '#' :
+			x.append( float(line.split()[0]))
+			y.append( float(line.split()[1]))
+	f.close()
 
-# Edit the layout
-layout = dict(title = 'Sinc plot',
+	trace = go.Scatter(
+		x = x,
+		y = y,
+		mode = 'lines')
+
+	# Edit the layout
+	layout = dict(title = 'Sinc plot',
               xaxis = dict(title = 'Time'),
               yaxis = dict(title = 'Amplitude'),
               )
 
-fig = go.Figure(data=[trace], layout=layout)
+	fig = go.Figure(data=[trace], layout=layout)
 
-plotlyfig2json(fig, './result/plot.json')
+	plotlyfig2json(fig, './result/plot.ply')
