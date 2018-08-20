@@ -1,1 +1,2 @@
 python post.py -i result/result.oneD
+gnuplot gnu.plt
