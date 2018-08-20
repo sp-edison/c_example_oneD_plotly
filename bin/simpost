@@ -1,2 +1,2 @@
-python post.py -i result/result.oneD
+/SYSTEM/python/2.7.14/bin/python post.py -i result/result.oneD
 gnuplot gnu.plt
